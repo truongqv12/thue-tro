@@ -1,0 +1,15 @@
+.admin-add .show-avatar {
+  overflow: hidden;
+}
+
+.admin-add .show-avatar img {
+  width: 200px;
+  height: 200px;
+  background-color: #b0b2ad;
+  border: 2px solid #b0b2ad;
+}
+
+.admin-add .show-avatar i {
+  padding-right: 5px;
+}
+
