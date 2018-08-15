@@ -1,10 +1,6 @@
 @extends('admin.layout.index')
 @section('page_title','Administration')
 
-@section('link_css')
-  <link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
-@endsection
-
 @section('content')
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -30,7 +26,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body table-responsive">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="data_table" class="table table-bordered table-striped">
               <thead>
               <tr>
                 @foreach($columns as $column)
@@ -44,6 +40,7 @@
                     <td>{{$admin->adm_name}}</td>
                     <td>{{$admin->adm_login_name}}</td>
                     <td>{{$admin->adm_email}}</td>
+                    <td><img src="{{asset('storage/user/images/'.$admin->adm_avatar)}}" alt="" style="width: 40px; height: 40px" title="{{$admin->adm_avatar}}"></td>
                     <td>{{$admin->adm_phone}}</td>
                     <td>
                       @if($admin->adm_status == 1)
@@ -54,18 +51,20 @@
                     </td>
                     <td>
                       @if($admin->adm_active == 1 && $admin->adm_add == 1 && $admin->adm_edit == 1 && $admin->adm_delete == 1)
-                        <label class="label label-success">SuperAdmin</label>
-                      @else
-                        <label class="label label-warning">Mod</label>
+                        <label class="label label-success">Super Admin</label>
+                      @elseif( $admin->adm_add == 1)
+                        <label class="label label-violet">Mod Create</label>
+                      @elseif( $admin->adm_edit == 1)
+                        <label class="label label-warning">Mod Edit</label>
                       @endif
                     </td>
                     <td>
-                      <button class="btn label label-info"><i class="fa fa-eye"></i></button>
-                      @if( Auth::user()->adm_edit == 1 )
-                        <button class="btn label label-success"><i class="fa fa-pencil"></i></button>
+                      <a href="" class="btn btn-action label label-info"><i class="fa fa-eye"></i></a>
+                      @if( Auth::user()->adm_edit == 1 && $admin->adm_login_name != 'admin')
+                        <a href="{{route('administration_edit',['id'=>$admin->adm_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
                       @endif
                       @if($admin->adm_login_name != 'admin' && Auth::user()->adm_delete == 1)
-                        <button class="btn label label-danger"><i class="fa fa-trash"></i></button>
+                        <a href="{{route('administration_delete',['id'=>$admin->adm_id])}}" onclick="return confirm('Bạn có chắc muốn xóa')" class="btn btn-action label label-danger"><i class="fa fa-trash"></i></a>
                       @endif
                     </td>
                   </tr>
@@ -92,14 +91,10 @@
 @endsection
 
 @section('script')
-  <!-- DataTables -->
-  <script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-  <script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 
-  <!-- page script -->
   <script>
   $(function () {
-    $('#example1').DataTable()
+    $('#data_table').DataTable()
   })
 </script>
 @endsection

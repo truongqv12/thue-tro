@@ -91,6 +91,28 @@ $('#adm_avatar').on('change', function (e) {
     };
 });
 
+// ajax delete
+// $('.btn-delete-js').on("click",function(){
+//     var adm_id =  $(this).data("id");
+//
+//     if (confirm('Bạn muốn xóa không')){
+//         $.ajax({
+//             type: "GET",
+//             url: 'administration/delete',
+//             data: {
+//                 adm_id: adm_id,
+//             },
+//             success: function (result) {
+//                 // $('.comfirm-icon').css({'visibility': 'visible'});
+//                 console.log('thanh cong');
+//             },
+//         });
+//     }
+//     else{
+//         console.log('Xóa thất bại');
+//     }
+// });
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {

@@ -1,16 +1,19 @@
-
-.admin-add {
-  .show-avatar {
-    overflow: hidden;
-    img{
-      width: 200px;
-      height: 200px;
-      background-color: #b0b2ad;
-      border: 2px solid #b0b2ad;
-      //display: block;
-    }
-    i{
-      padding-right: 5px;
-    }
+.btn-action{
+  padding: 5px 10px;
+}
+.label-violet{
+  background: #652C90;
+}
+.show-avatar {
+  overflow: hidden;
+  img{
+    width: 200px;
+    height: 200px;
+    background-color: #b0b2ad;
+    border: 2px solid #b0b2ad;
+    //display: block;
+  }
+  i{
+    padding-right: 5px;
   }
 }

@@ -13,12 +13,15 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{asset('backend/bower_components/Ionicons/css/ionicons.min.css')}}">
   <!-- Addcss -->
-  @yield('link_css')
+@yield('link_css')
+  <link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('backend/dist/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('backend/dist/css/skins/_all-skins.min.css')}}">
+
+  <link rel="stylesheet" href="{{asset('backend/css/admin.css')}}">
   <style>
     .alert{
       border-radius: 0;
@@ -284,12 +287,17 @@
 <script src="{{asset('backend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->
 <script src="{{asset('backend/bower_components/fastclick/lib/fastclick.js')}}"></script>
+<!-- DataTables -->
+<script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+
+<script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 <!-- Add script -->
 @yield('script')
 <!-- AdminLTE App -->
 <script src="{{asset('backend/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('backend/dist/js/demo.js')}}"></script>
-@yield('custom_script')
+
+<script src="{{asset('backend/js/admin.js')}}"></script>
 </body>
 </html>

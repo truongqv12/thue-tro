@@ -10,7 +10,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{asset('backend/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                <img src="{{ (Auth::user()->adm_avatar == null) ? asset('backend/dist/img/user2-160x160.jpg') : asset('storage/user/images/'.Auth::user()->adm_avatar) }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ Auth::user()->adm_name }}</p>

@@ -38,7 +38,7 @@
                                 <li><!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="{{asset('backend/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                                            <img src="{{ (Auth::user()->adm_avatar == null) ? asset('backend/dist/img/user2-160x160.jpg') : asset('storage/user/images/'.Auth::user()->adm_avatar) }}" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Support Team
@@ -109,13 +109,13 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{asset('backend/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+                        <img src="{{(Auth::user()->adm_avatar == null) ? asset('backend/dist/img/user2-160x160.jpg') : asset('storage/user/images/'.Auth::user()->adm_avatar)}}" class="user-image" alt="User Image">
                         <span class="hidden-xs">{{ Auth::user()->adm_name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="{{asset('backend/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                            <img src="{{(Auth::user()->adm_avatar == null) ? asset('backend/dist/img/user2-160x160.jpg') : asset('storage/user/images/'.Auth::user()->adm_avatar)}}" class="img-circle" alt="User Image">
 
                             <p>
                                 {{ Auth::user()->adm_name }}
@@ -140,7 +140,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{route('admin_profile')}}" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{route('logout_admin')}}" class="btn btn-default btn-flat">Sign out</a>
