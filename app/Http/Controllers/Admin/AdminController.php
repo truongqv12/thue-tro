@@ -35,6 +35,7 @@ class AdminController extends Controller
 
     // Thêm
     public function create(Request $rq) {
+
         $this->validate($rq,
             [
                 'adm_name' => 'required',
@@ -42,7 +43,7 @@ class AdminController extends Controller
                 'adm_password' => 'required|min:4|confirmed',
                 'adm_email' => 'required|email|unique:admin_user,adm_email',
                 'adm_phone'  => 'min:4| max:15',
-                'adm_avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'upload_avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'role' => 'required'
             ],[
                 'adm_name.required' => 'Họ tên không được để trống',
@@ -58,20 +59,20 @@ class AdminController extends Controller
                 'adm_password.min' => 'Mật khẩu quá ngắn',
                 'adm_phone.min' => 'Số điện thoại không đúng',
                 'adm_phone.max' => 'Số điện thoại không đúng',
-                'adm_avatar.image' => 'File phải là ảnh',
-                'adm_avatar.max' => 'Dung lượng file quá lớn',
+                'upload_avatar.image' => 'File phải là ảnh',
+                'upload_avatar.max' => 'Dung lượng file quá lớn',
             ]
         );
 
-        if($rq->hasFile('adm_avatar')){
-            $image = $rq->adm_avatar;
-            $img_name = date('y-m-d').'_'.$rq->adm_login_name.'_avatar.'.$image->getClientOriginalExtension();
+        $rq->offsetunset('_token');
+        if($rq->hasFile('upload_avatar')){
+            $image = $rq->upload_avatar;
+            $img_name = date('y-m-d').'_'.$rq->adm_login_name.'_avatar'.'.jpg';
             $resize = Image::make($image);
             $resize->resize(200,200)->encode('jpg');
             Storage::disk('user')->put($img_name,$resize->__toString());
         }
 
-        $rq->offsetunset('_token');
         $role = $rq->role;
         if ($role == 'adm_add') {
             $rq->merge([
@@ -89,8 +90,9 @@ class AdminController extends Controller
                 'adm_delete' => 1
             ]);
         }
+
         $rq->merge([
-            'adm_avatar'=>$img_name,
+            'adm_avatar' => $img_name,
             'adm_password' => bcrypt($rq->adm_password)
         ]);
         // create new product
@@ -123,7 +125,7 @@ class AdminController extends Controller
                 'adm_password' => 'required|min:4|confirmed',
                 'adm_email' => 'required|email',
                 'adm_phone'  => 'min:4| max:15',
-                'adm_avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'upload_avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'role' => 'required'
             ],[
                 'adm_name.required' => 'Họ tên không được để trống',
@@ -135,8 +137,8 @@ class AdminController extends Controller
                 'adm_password.min' => 'Mật khẩu quá ngắn',
                 'adm_phone.min' => 'Số điện thoại không đúng',
                 'adm_phone.max' => 'Số điện thoại không đúng',
-                'adm_avatar.image' => 'File phải là ảnh',
-                'adm_avatar.max' => 'Dung lượng file quá lớn',
+                'upload_avatar.image' => 'File phải là ảnh',
+                'upload_avatar.max' => 'Dung lượng file quá lớn',
             ]
         );
 
@@ -160,23 +162,24 @@ class AdminController extends Controller
                 $admin->adm_edit = 1;
                 $admin->adm_delete = 1;
             }
-            if($rq->hasFile('adm_avatar')){
+            if($rq->hasFile('upload_avatar')){
                 Storage::disk('user')->delete($admin->adm_avatar);
-                $image = $rq->adm_avatar;
-                $img_name = date('y-m-d').'_'.$rq->adm_login_name.'_avatar.'.$image->getClientOriginalExtension();
+                $image = $rq->upload_avatar;
+                $img_name = date('y-m-d').'_'.$rq->adm_login_name.'_avatar'.'.jpg';
                 $resize = Image::make($image);
                 $resize->resize(200,200)->encode('jpg');
                 Storage::disk('user')->put($img_name,$resize->__toString());
             }
+
             $rq->merge([
-                'adm_avatar'=>$img_name,
                 'adm_password' => bcrypt($new_password)
             ]);
+
             $admin->adm_name = $rq->adm_name;
             $admin->adm_email = $rq->adm_email;
             $admin->adm_password = $rq->adm_password;
             $admin->adm_phone = $rq->adm_phone;
-            $admin->adm_avatar = $rq->adm_avatar;
+            $admin->adm_avatar = $img_name;
             $check = $admin->save();
             if ($check){
                 return redirect()->route('administration')->with('success','Sửa tài khoản thành công');

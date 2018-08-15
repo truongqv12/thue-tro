@@ -122,9 +122,9 @@
                                     <a id="browse_file" class="btn btn-success"><i class="fa fa-file-image-o"></i> Chọn avatar</a>
                                 </div>
                             </div>
-                            @if($errors->has('adm_avatar'))
+                            @if($errors->has('upload_avatar'))
                                 <div class="help-block text-red">
-                                    * {!! $errors->first('adm_avatar') !!}
+                                    * {!! $errors->first('upload_avatar') !!}
                                 </div>
                             @endif
                         </div>

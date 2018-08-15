@@ -57,7 +57,7 @@ class ProfileController extends Controller
                 Storage::disk('user')->put($img_name,$resize->__toString());
             }
             $rq->merge([
-                'adm_avatar'=>$img_name,
+                'adm_avatar' => $img_name,
                 'adm_password' => bcrypt($new_password)
             ]);
             $admin->adm_name = $rq->adm_name;

@@ -1,6 +1,10 @@
 @extends('admin.layout.index')
 @section('page_title','Administration')
 
+@section('custom_css')
+  <style>
+  </style>
+@endsection
 @section('content')
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -59,7 +63,7 @@
                       @endif
                     </td>
                     <td>
-                      <a href="" class="btn btn-action label label-info"><i class="fa fa-eye"></i></a>
+                      <a href="javascript;" class="btn btn-action label label-info" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i></a>
                       @if( Auth::user()->adm_edit == 1 && $admin->adm_login_name != 'admin')
                         <a href="{{route('administration_edit',['id'=>$admin->adm_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
                       @endif
@@ -88,6 +92,7 @@
     <!-- /.row -->
   </section>
   <!-- /.content -->
+  @include('admin.admin.modal-ajax')
 @endsection
 
 @section('script')

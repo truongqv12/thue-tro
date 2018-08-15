@@ -17,7 +17,7 @@ class Admin extends Authenticatable
     protected $table = 'admin_user';
     protected $primaryKey = 'adm_id';
     protected $fillable = [
-        'adm_login_name', 'adm_name', 'adm_password', 'adm_email', 'adm_avatar', 'use_phone', 'admin_id', 'adm_active', 'adm_add', 'adm_edit', 'adm_delete', 'create_date'
+        'adm_login_name', 'adm_name', 'adm_password', 'adm_email', 'adm_phone', 'adm_avatar', 'adm_email', 'admin_id', 'adm_active', 'adm_add', 'adm_edit', 'adm_delete', 'create_date'
     ];
 
     /**
