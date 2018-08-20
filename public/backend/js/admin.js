@@ -88,30 +88,25 @@ $('#adm_avatar').on('change', function (e) {
             $('#img').attr('src', e.target.result);
         };
         reader.readAsDataURL(fileInput.files[0]);
-    };
+    }
 });
+// ajax info
+$('.ajax-show-info').on("click", function () {
+    var adm_id = $(this).data("id");
 
-// ajax delete
-// $('.btn-delete-js').on("click",function(){
-//     var adm_id =  $(this).data("id");
-//
-//     if (confirm('Bạn muốn xóa không')){
-//         $.ajax({
-//             type: "GET",
-//             url: 'administration/delete',
-//             data: {
-//                 adm_id: adm_id,
-//             },
-//             success: function (result) {
-//                 // $('.comfirm-icon').css({'visibility': 'visible'});
-//                 console.log('thanh cong');
-//             },
-//         });
-//     }
-//     else{
-//         console.log('Xóa thất bại');
-//     }
-// });
+    $.ajax({
+        type: "GET",
+        url: 'ajax/info/' + adm_id,
+        data: {},
+        success: function success(result) {
+            console.log(result);
+            $(".modal-body").html(result);
+        },
+        error: function error() {
+            console.log("Lỗi data");
+        }
+    });
+});
 
 /***/ }),
 /* 2 */

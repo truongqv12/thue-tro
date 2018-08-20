@@ -23,7 +23,7 @@ class AdminController extends Controller
             'columns' => $columns,
         ]);
     }
-
+    // Thêm
     public function add() {
         if (Auth::user()->adm_add == 1){
             return view('admin.admin.add');
@@ -32,8 +32,6 @@ class AdminController extends Controller
             return redirect()->back();
         }
     }
-
-    // Thêm
     public function create(Request $rq) {
 
         $this->validate($rq,
@@ -103,6 +101,7 @@ class AdminController extends Controller
         }
     }
 
+    // Sửa
     public function edit($id){
         if (Auth::user()->adm_edit == 1){
             $admin = Admin::findOrFail($id);
@@ -114,7 +113,6 @@ class AdminController extends Controller
             return redirect()->back();
         }
     }
-    // Sửa
     public function update(Request $rq , $id){
         $admin = Admin::find($id);
 //        dd($rq->hasFile('adm_avatar'));
@@ -192,6 +190,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error','Mật khẩu không khớp');
         }
     }
+
     // Xóa
     public function delete($id){
         if (Auth::user()->adm_delete == 1) {

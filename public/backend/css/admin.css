@@ -1,5 +1,9 @@
 .btn-action {
   padding: 5px 10px;
+  margin: 1px;
+  display: inline-block;
+  width: 31px;
+  height: 23px;
 }
 
 .label-violet {
