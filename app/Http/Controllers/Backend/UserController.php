@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Ajax;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AjaxController extends Controller
+class UserController extends Controller
 {
     //
 }

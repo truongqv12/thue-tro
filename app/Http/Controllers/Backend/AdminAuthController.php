@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +12,7 @@ class AdminAuthController extends Controller
             return redirect()->route('admin');
         }
         else {
-            return view('admin.layout.login');
+            return view('backend.layout.login');
         }
     }
 

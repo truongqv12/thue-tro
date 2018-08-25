@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Ajax;
+namespace App\Http\Controllers\Backend\Ajax;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ class ViewInfoController extends AjaxController
 {
     public function ajaxInfo($id) {
         $admin_info = Admin::findOrFail($id);
-        return view('admin.ajax.modal-ajax',[
+        return view('backend.ajax.modal-ajax',[
             'admin_info' => $admin_info
         ]);
     }

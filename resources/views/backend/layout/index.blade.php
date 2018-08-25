@@ -46,12 +46,12 @@
 <!-- Site wrapper -->
 <div class="wrapper">
 
-  @include('admin.layout.header')
+  @include('backend.layout.header')
 
   <!-- =============================================== -->
 
   <!-- Left side column. contains the sidebar -->
-  @include('admin.layout.navbar')
+  @include('backend.layout.navbar')
 
   <!-- =============================================== -->
 
@@ -77,7 +77,7 @@
     </div>
   <!-- /.content-wrapper -->
 
-  @include('admin.layout.footer')
+  @include('backend.layout.footer')
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

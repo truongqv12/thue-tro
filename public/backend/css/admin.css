@@ -25,3 +25,11 @@
   padding-right: 5px;
 }
 
+.loading_view {
+  padding-bottom: 30px;
+  text-align: center;
+  display: none;
+  width: auto;
+  height: 200px;
+}
+

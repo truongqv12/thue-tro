@@ -4,7 +4,7 @@
  * Date: 8/7/2018
  * Time: 9:22 AM
  */ -->
-@extends('admin.layout.index')
+@extends('backend.layout.index')
 @section('page_title','Dashboard')
 
 @section('content')

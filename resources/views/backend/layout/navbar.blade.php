@@ -31,21 +31,29 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview active">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                </ul>
-            </li>
+
             <li>
                 <a href="{{route('administration')}}">
                     <i class="fa fa-life-bouy"></i> <span>Admin</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-map-o"></i>
+                    <span>Địa điểm</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('city')}}"><i class="fa fa-circle-o"></i> Thành phố</a></li>
+                    <li><a href=""><i class="fa fa-circle-o"></i> Quận/Huyện</a></li>
+                    <li><a href=""><i class="fa fa-circle-o"></i> Phường/Xã</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/">
+                    <i class="fa fa-university"></i> <span>Danh sách trường đại học</span>
                 </a>
             </li>
             <li>

@@ -15,32 +15,48 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//admin login
-Route::get('/admin/login', 'Admin\AdminAuthController@getAdminLogin')->name('login_admin');
-Route::post('/admin/login', 'Admin\AdminAuthController@postAdminLogin');
-Route::get('/admin/logout', 'Admin\AdminAuthController@getAdminLogout')->name('logout_admin');
+//backend login
+Route::get('/admin/login', 'backend\AdminAuthController@getAdminLogin')->name('login_admin');
+Route::post('/admin/login', 'backend\AdminAuthController@postAdminLogin');
+Route::get('/admin/logout', 'backend\AdminAuthController@getAdminLogout')->name('logout_admin');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function (){
-    Route::get('/', 'admin\DashboardController@index')->name('admin');
+    Route::get('/', 'backend\DashboardController@index')->name('admin');
+
+
     Route::group(['prefix' => 'profile'], function (){
-        Route::get('/', 'Admin\ProfileController@index')->name('admin_profile');
-        Route::post('/', 'Admin\ProfileController@edit')->name('admin_profile');
+        Route::get('/', 'backend\ProfileController@index')->name('admin_profile');
+        Route::post('/', 'backend\ProfileController@edit');
     });
+
+
     Route::group(['prefix' => 'administration'], function (){
-        Route::get('/', 'Admin\AdminController@index')->name('administration');
+        Route::get('/', 'backend\AdminController@index')->name('administration');
         //thêm
-        Route::get('/add', 'Admin\AdminController@add')->name('administration_add');
-        Route::post('/add', 'Admin\AdminController@create')->name('administration_add');
+        Route::get('/add', 'backend\AdminController@add')->name('administration_add');
+        Route::post('/add', 'backend\AdminController@create');
         // sửa
-        Route::get('/edit/{id}', 'Admin\AdminController@edit')->name('administration_edit');
-        Route::post('/edit/{id}', 'Admin\AdminController@update')->name('administration_edit');
+        Route::get('/edit/{id}', 'backend\AdminController@edit')->name('administration_edit');
+        Route::post('/edit/{id}', 'backend\AdminController@update');
         //xóa
-        Route::get('/delete/{id}', 'Admin\AdminController@delete')->name('administration_delete');
+        Route::get('/delete/{id}', 'backend\AdminController@delete')->name('administration_delete');
         //Xem
-        Route::get('/info/{id}', 'Admin\AdminController@ajaxInfo')->name('administration_info');
+    });
+
+    Route::group(['prefix' => 'city'], function (){
+       Route::get('/', 'backend\CityController@index')->name('city');
+        //thêm
+        Route::get('/add', 'backend\CityController@add')->name('city_add');
+        Route::post('/add', 'backend\CityController@create');
+        //Sửa
+        Route::get('/edit/{id}', 'backend\CityController@edit')->name('city_edit');
+        Route::post('/edit/{id}', 'backend\CityController@update');
+        //Xóa
+        Route::get('/delete/{id}', 'backend\CityController@delete')->name('city_delete');
+;
     });
 
     Route::group(['prefix' => 'ajax'], function (){
-        Route::get('/info/{id}', 'Admin\Ajax\ViewInfoController@ajaxInfo')->name('administration_info');
+        Route::get('/info/{id}', 'backend\Ajax\ViewInfoController@ajaxInfo')->name('administration_info_ajax');
     });
 });

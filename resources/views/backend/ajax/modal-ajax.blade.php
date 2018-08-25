@@ -36,8 +36,7 @@
                     <b>Ngày tạo</b> <a class="pull-right text-bold"> {{$admin_info->created_at}}</a>
                 </li>
             </ul>
-
-            <a href="{{route('administration_edit', ['id'=>$admin_info->adm_id])}}" class="btn btn-danger btn-block"><b>Edit</b></a>
+            <a href="{{route('administration_edit', ['id'=>$admin_info->adm_id])}}" class="btn btn-danger btn-block pull-right"><b>Edit</b></a>
         </div>
         <!-- /.box-body -->
     @endif

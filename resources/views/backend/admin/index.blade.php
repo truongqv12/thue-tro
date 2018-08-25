@@ -1,4 +1,4 @@
-@extends('admin.layout.index')
+@extends('backend.layout.index')
 @section('page_title','Administration')
 
 @section('custom_css')
@@ -64,7 +64,7 @@
                     </td>
                     <td>
                       <a href="" class="btn btn-action label label-info ajax-show-info" data-id="{{$admin->adm_id}}" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i></a>
-                      @if( Auth::user()->adm_edit == 1 && $admin->adm_login_name != 'admin')
+                      @if( Auth::user()->adm_edit == 1 && $admin->adm_login_name != 'backend')
                         <a href="{{route('administration_edit',['id'=>$admin->adm_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
                       @endif
                       @if($admin->adm_login_name != 'admin' && Auth::user()->adm_delete == 1)
@@ -101,11 +101,8 @@
           <h4 class="modal-title">Thông tin</h4>
         </div>
         <div class="modal-body">
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <div class="loading_view" style="background: url('{{asset('backend/images/loading.gif')}}') no-repeat center center"></div>
+          <div class="load_content_modal_ajax"></div>
         </div>
       </div>
       <!-- /.modal-content -->

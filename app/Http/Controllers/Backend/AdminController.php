@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Backend;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class AdminController extends Controller
             'Họ tên', 'Tài khoản', 'Email', 'Image', 'SĐT', 'Trạng thái', 'Quyền', 'Hành động'
         ];
 
-        return view('admin.admin.index',[
+        return view('backend.admin.index',[
             'admins' => $admins,
             'columns' => $columns,
         ]);
@@ -26,7 +26,7 @@ class AdminController extends Controller
     // Thêm
     public function add() {
         if (Auth::user()->adm_add == 1){
-            return view('admin.admin.add');
+            return view('backend.admin.add');
         }
         else {
             return redirect()->back();
@@ -72,7 +72,7 @@ class AdminController extends Controller
         }
 
         $role = $rq->role;
-        if ($role == 'adm_add') {
+        if ($role == 'mod_create') {
             $rq->merge([
                 'adm_active' => 0,
                 'adm_add' => 1,
@@ -80,7 +80,7 @@ class AdminController extends Controller
                 'adm_delete' => 0
             ]);
         }
-        elseif($role == 'adm_edit') {
+        elseif($role == 'mod_edit') {
             $rq->merge([
                 'adm_active' => 0,
                 'adm_add' => 0,
@@ -95,7 +95,7 @@ class AdminController extends Controller
         ]);
         // create new product
         if (Admin::create($rq->all())) {
-            return redirect()->back()->with('success','Thêm mới tài khoản admin thành công');
+            return redirect()->back()->with('success','Thêm mới tài khoản backend thành công');
         }else{
             return redirect()->back()->with('error','Thêm mới tài khoản thất bại, vui lòng thử lại');
         }
@@ -105,7 +105,7 @@ class AdminController extends Controller
     public function edit($id){
         if (Auth::user()->adm_edit == 1){
             $admin = Admin::findOrFail($id);
-            return view('admin.admin.edit',[
+            return view('backend.admin.edit',[
                 'admin' => $admin,
             ]);
         }
@@ -114,27 +114,13 @@ class AdminController extends Controller
         }
     }
     public function update(Request $rq , $id){
-        $admin = Admin::find($id);
+        $admin = Admin::findOrFail($id);
 //        dd($rq->hasFile('adm_avatar'));
         $this->validate($rq,
             [
-                'adm_name' => 'required',
-                'adm_password_old' => 'required',
-                'adm_password' => 'required|min:4|confirmed',
-                'adm_email' => 'required|email',
-                'adm_phone'  => 'min:4| max:15',
                 'upload_avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'role' => 'required'
             ],[
-                'adm_name.required' => 'Họ tên không được để trống',
-                'adm_email.required' => 'Email không được để trống',
-                'adm_email.email' => 'Email không đúng',
-                'adm_password_old.required' => 'Bạn chưa nhập nhập mật khẩu cũ',
-                'adm_password.required' => 'Bạn chưa nhập mật khẩu mới',
-                'adm_password.confirmed' => 'Mật khẩu mới không khớp',
-                'adm_password.min' => 'Mật khẩu quá ngắn',
-                'adm_phone.min' => 'Số điện thoại không đúng',
-                'adm_phone.max' => 'Số điện thoại không đúng',
                 'upload_avatar.image' => 'File phải là ảnh',
                 'upload_avatar.max' => 'Dung lượng file quá lớn',
             ]
@@ -143,52 +129,44 @@ class AdminController extends Controller
         $img_name = $admin->adm_avatar;
 
         $rq->offsetunset('_token');
-        $current_password = $rq->adm_password_old;
-        $new_password = $rq->adm_password;
 
-        if (Hash::check($current_password, $admin->adm_password)){
-            $role = $rq->role;
-            if ($role == 'adm_add') {
-                $admin->adm_active = 0;
-                $admin->adm_add = 1;
-                $admin->adm_edit = 0;
-                $admin->adm_delete = 0;
-            }
-            elseif($role == 'adm_edit') {
-                $admin->adm_active = 0;
-                $admin->adm_add = 0;
-                $admin->adm_edit = 1;
-                $admin->adm_delete = 1;
-            }
-            if($rq->hasFile('upload_avatar')){
-                Storage::disk('user')->delete($admin->adm_avatar);
-                $image = $rq->upload_avatar;
-                $img_name = date('y-m-d').'_'.$rq->adm_login_name.'_avatar'.'.jpg';
-                $resize = Image::make($image);
-                $resize->resize(200,200)->encode('jpg');
-                Storage::disk('user')->put($img_name,$resize->__toString());
-            }
-
-            $rq->merge([
-                'adm_password' => bcrypt($new_password)
-            ]);
-
-            $admin->adm_name = $rq->adm_name;
-            $admin->adm_email = $rq->adm_email;
-            $admin->adm_password = $rq->adm_password;
-            $admin->adm_phone = $rq->adm_phone;
-            $admin->adm_avatar = $img_name;
-            $check = $admin->save();
-            if ($check){
-                return redirect()->route('administration')->with('success','Sửa tài khoản thành công');
-            }
-            else{
-                return redirect()->back()->with('error','Sửa tài khoản thất bại, vui lòng thử lại');
-            }
+        $role = $rq->role;
+        if ($role == 'super_admin') {
+            $admin->adm_active = 1;
+            $admin->adm_add = 1;
+            $admin->adm_edit = 1;
+            $admin->adm_delete = 1;
+        }
+        elseif ($role == 'mod_create') {
+            $admin->adm_active = 0;
+            $admin->adm_add = 1;
+            $admin->adm_edit = 0;
+            $admin->adm_delete = 0;
+        }
+        else {
+            $admin->adm_active = 0;
+            $admin->adm_add = 0;
+            $admin->adm_edit = 1;
+            $admin->adm_delete = 1;
+        }
+        if($rq->hasFile('upload_avatar')){
+            Storage::disk('user')->delete($admin->adm_avatar);
+            $image = $rq->upload_avatar;
+            $img_name = date('y-m-d').'_'.$rq->adm_login_name.'_avatar'.'.jpg';
+            $resize = Image::make($image);
+            $resize->resize(200,200)->encode('jpg');
+            Storage::disk('user')->put($img_name,$resize->__toString());
+        }
+        $admin->adm_status = $rq->adm_status;
+        $admin->adm_avatar = $img_name;
+        $check = $admin->save();
+        if ($check){
+            return redirect()->route('administration')->with('success','Sửa tài khoản thành công');
         }
         else{
-            return redirect()->back()->with('error','Mật khẩu không khớp');
+            return redirect()->back()->with('error','Sửa tài khoản thất bại, vui lòng thử lại');
         }
+
     }
 
     // Xóa

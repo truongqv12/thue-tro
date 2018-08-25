@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
@@ -12,7 +12,7 @@ use Intervention\Image\Facades\Image;
 class ProfileController extends Controller
 {
     public function index() {
-        return view('admin.profile.profile');
+        return view('backend.profile.profile');
     }
 
     public function edit(Request $rq){
