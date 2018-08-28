@@ -46,9 +46,9 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('city')}}"><i class="fa fa-circle-o"></i> Thành phố</a></li>
-                    <li><a href=""><i class="fa fa-circle-o"></i> Quận/Huyện</a></li>
-                    <li><a href=""><i class="fa fa-circle-o"></i> Phường/Xã</a></li>
+                    <li><a href="{{route('city')}}"><i class="fa fa-circle-o"></i> Thành phố </a></li>
+                    <li><a href="{{route('district')}}"><i class="fa fa-circle-o"></i> Quận/Huyện </a></li>
+                    <li><a href="{{route('wards')}}"><i class="fa fa-circle-o"></i> Phường/Xã </a></li>
                 </ul>
             </li>
             <li>

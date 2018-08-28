@@ -14,12 +14,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Thêm thành phố
+            Thêm quận huyện
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="{{route('city')}}">City</a></li>
-            <li class="active">Add</li>
+            <li class="active">Edit</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -36,7 +36,7 @@
                                 <label for="">Tên thành phố</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">@</span>
-                                    <input type="text" class="form-control" placeholder="Nhập tên thành phố" name="cty_name" id="name"  value="{{ old('cty_name') }}">
+                                    <input type="text" class="form-control" placeholder="Nhập tên thành phố" name="cty_name" id="name"  value="{{$item->cty_name}}">
                                 </div>
                                 @if($errors->has('cty_name'))
                                     <div class="help-block text-red">
@@ -50,7 +50,7 @@
                                 <label for="">Đường dẫn tĩnh</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">@</span>
-                                    <input type="text" class="form-control" readonly placeholder="Đường dẫn tĩnh" name="cty_slug" id="slug"  value="{{ old('cty_slug') }}">
+                                    <input type="text" class="form-control" readonly placeholder="Đường dẫn tĩnh" name="cty_slug" id="slug"  value="{{$item->cty_slug}}">
                                 </div>
                                 @if($errors->has('cty_slug'))
                                     <div class="help-block text-red">
@@ -64,7 +64,10 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-lg btn-primary center-block">Tạo mới</button>
+                    <div class="center-block max-width-content">
+                        <a href="{{route('city')}}" class="btn btn-lg btn-primary" style="margin-right: 10px">Quay lại</a>
+                        <button type="submit" class="btn btn-lg btn-warning">Sửa <i class="fa fa-pencil-square-o"></i></button>
+                    </div>
                 </div>
             </div>
         </form>

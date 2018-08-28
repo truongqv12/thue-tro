@@ -11,4 +11,8 @@ class City extends Model
     protected $fillable = [
         'cty_name', 'cty_slug'
     ];
+
+    function district() {
+        return $this->hasMany(District::class, 'dis_cty_id', 'cty_id');
+    }
 }

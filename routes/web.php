@@ -29,7 +29,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function (){
         Route::post('/', 'backend\ProfileController@edit');
     });
 
-
     Route::group(['prefix' => 'administration'], function (){
         Route::get('/', 'backend\AdminController@index')->name('administration');
         //thêm
@@ -44,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function (){
     });
 
     Route::group(['prefix' => 'city'], function (){
-       Route::get('/', 'backend\CityController@index')->name('city');
+        Route::get('/', 'backend\CityController@index')->name('city');
         //thêm
         Route::get('/add', 'backend\CityController@add')->name('city_add');
         Route::post('/add', 'backend\CityController@create');
@@ -53,7 +52,33 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function (){
         Route::post('/edit/{id}', 'backend\CityController@update');
         //Xóa
         Route::get('/delete/{id}', 'backend\CityController@delete')->name('city_delete');
-;
+        ;
+    });
+
+    Route::group(['prefix' => 'districts'], function (){
+        Route::get('/', 'backend\DistrictController@index')->name('district');
+        //thêm
+        Route::get('/add', 'backend\DistrictController@add')->name('district_add');
+        Route::post('/add', 'backend\DistrictController@create');
+        //Sửa
+        Route::get('/edit/{id}', 'backend\DistrictController@edit')->name('district_edit');
+        Route::post('/edit/{id}', 'backend\DistrictController@update');
+        //Xóa
+        Route::get('/delete/{id}', 'backend\DistrictController@delete')->name('district_delete');
+        ;
+    });
+
+    Route::group(['prefix' => 'wards'], function (){
+        Route::get('/', 'backend\WardsController@index')->name('wards');
+        //thêm
+        Route::get('/add', 'backend\WardsController@add')->name('wards_add');
+        Route::post('/add', 'backend\WardsController@create');
+        //Sửa
+        Route::get('/edit/{id}', 'backend\WardsController@edit')->name('wards_edit');
+        Route::post('/edit/{id}', 'backend\WardsController@update');
+        //Xóa
+        Route::get('/delete/{id}', 'backend\WardsController@delete')->name('wards_delete');
+        ;
     });
 
     Route::group(['prefix' => 'ajax'], function (){

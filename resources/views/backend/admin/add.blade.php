@@ -8,8 +8,6 @@
 @section('page_title','Thêm mới')
 @section('link_css')
     <link rel="stylesheet" href="{{asset('backend/bower_components/select2/dist/css/select2.min.css')}}">
-    <!-- Fileinput -->
-    {{--<link rel="stylesheet" href="{{asset('backend/bower_components/bootstrap-fileinput/css/fileinput.min.css?v=4.3.7')}}">--}}
 @endsection
 
 @section('content')
@@ -145,11 +143,6 @@
     <script src="{{asset('backend/plugins/input-mask/jquery.inputmask.js')}}"></script>
     <!-- Select2 -->
     <script src="{{asset('backend/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
-    {{--<!-- Fileinput -->--}}
-    {{--<script src="{{asset('backend/bower_components/bootstrap-fileinput/js/plugins/canvas-to-blob.js?v=4.3.7')}}"></script>--}}
-
-    {{--<script src="{{asset('backend/bower_components/bootstrap-fileinput/js/fileinput.min.js?v=4.3.7')}}"></script>--}}
-
     <!-- page script -->
     <script>
         $(function () {

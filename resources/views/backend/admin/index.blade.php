@@ -64,7 +64,7 @@
                     </td>
                     <td>
                       <a href="" class="btn btn-action label label-info ajax-show-info" data-id="{{$admin->adm_id}}" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i></a>
-                      @if( Auth::user()->adm_edit == 1 && $admin->adm_login_name != 'backend')
+                      @if( Auth::user()->adm_edit == 1 && $admin->adm_login_name != 'admin')
                         <a href="{{route('administration_edit',['id'=>$admin->adm_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
                       @endif
                       @if($admin->adm_login_name != 'admin' && Auth::user()->adm_delete == 1)

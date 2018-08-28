@@ -7,18 +7,18 @@
 @extends('backend.layout.index')
 @section('page_title','Thêm mới')
 @section('link_css')
-
+    <link rel="stylesheet" href="{{asset('backend/bower_components/select2/dist/css/select2.min.css')}}">
 @endsection
 
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Thêm thành phố
+            Thêm Quận Huyện
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="{{route('city')}}">City</a></li>
+            <li><a href="{{route('district')}}">District</a></li>
             <li class="active">Add</li>
         </ol>
     </section>
@@ -33,30 +33,38 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="">Tên thành phố</label>
+                                <label for="">Tên quận, huyện</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">@</span>
-                                    <input type="text" class="form-control" placeholder="Nhập tên thành phố" name="cty_name" id="name"  value="{{ old('cty_name') }}">
+                                    <input type="text" class="form-control" placeholder="Nhập tên quận huyện" name="dis_name" id="name"  value="{{ old('dis_name') }}">
                                 </div>
-                                @if($errors->has('cty_name'))
+                                @if($errors->has('dis_name'))
                                     <div class="help-block text-red">
-                                        * {!! $errors->first('cty_name') !!}
+                                        * {!! $errors->first('dis_name') !!}
                                     </div>
                                 @endif
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Đường dẫn tĩnh</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">@</span>
-                                    <input type="text" class="form-control" readonly placeholder="Đường dẫn tĩnh" name="cty_slug" id="slug"  value="{{ old('cty_slug') }}">
+                                    <input type="text" class="form-control" readonly placeholder="Đường dẫn tĩnh" name="dis_slug" id="slug"  value="{{ old('dis_slug') }}">
                                 </div>
-                                @if($errors->has('cty_slug'))
+                                @if($errors->has('dis_slug'))
                                     <div class="help-block text-red">
-                                        {!! $errors->first('cty_slug') !!}
+                                        {!! $errors->first('dis_slug') !!}
                                     </div>
                                 @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Thành phố</label>
+                                <select class="form-control select2" style="width: 100%;" name="dis_cty_id">
+                                    @foreach($cities as $city)
+                                        <option value="{{$city->cty_id}}" >{{$city->cty_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -72,4 +80,13 @@
     <!-- /.content -->
 @endsection
 @section('script')
+    <!-- Select2 -->
+    <script src="{{asset('backend/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+    <!-- page script -->
+    <script>
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2();
+        })
+    </script>
 @endsection

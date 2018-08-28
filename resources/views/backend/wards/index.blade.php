@@ -9,7 +9,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">City</li>
+      <li class="active">Wards</li>
 
     </ol>
   </section>
@@ -19,9 +19,9 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Thành phố</h3>
+            <h3 class="box-title">Quận \ Huyện</h3>
             @if( Auth::user()->adm_add == 1 )
-              <a href="{{route('city_add')}}" class="btn btn-success btn-sm" style="margin-left: 10px"><i class="fa fa-plus-square"></i> Thêm mới </a>
+              <a href="{{route('wards_add')}}" class="btn btn-success btn-sm" style="margin-left: 10px"><i class="fa fa-plus-square"></i> Thêm mới </a>
             @endif
           </div>
           <!-- /.box-header -->
@@ -35,16 +35,17 @@
               </tr>
               </thead>
               <tbody>
-                @foreach($cities as $item)
+                @foreach($wards as $item)
                   <tr>
-                    <td>{{$item->cty_name}}</td>
-                    <td>{{$item->cty_slug}}</td>
+                    <td>{{$item->war_name}}</td>
+                    <td>{{$item->district->dis_name . ' -- ' . $item->district->city->cty_name}}</td>
+                    <td>{{$item->war_slug}}</td>
                     <td>
                       @if( Auth::user()->adm_edit == 1)
-                        <a href="{{route('city_edit',['id' => $item->cty_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
+                        <a href="{{route('wards_edit',['id' => $item->war_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
                       @endif
                       @if(Auth::user()->adm_delete == 1)
-                        <a href="{{route('city_delete',['id' => $item->cty_id])}}" onclick="return confirm('Bạn có chắc muốn xóa: {{$item->cty_name}}')" class="btn btn-action label label-danger"><i class="fa fa-trash"></i></a>
+                        <a href="{{route('wards_delete',['id' => $item->war_id])}}" onclick="return confirm('Bạn có chắc muốn xóa: {{$item->war_name}}')" class="btn btn-action label label-danger"><i class="fa fa-trash"></i></a>
                       @endif
                     </td>
                   </tr>

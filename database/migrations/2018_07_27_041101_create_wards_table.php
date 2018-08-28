@@ -17,7 +17,7 @@ class CreateWardsTable extends Migration
             $table->increments('war_id');
             $table->string('war_name');
             $table->string('war_slug');
-            $table->string('war_dis_name');
+            $table->string('war_dis_id');
             $table->timestamps();
         });
     }

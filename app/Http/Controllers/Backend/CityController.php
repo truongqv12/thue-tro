@@ -47,16 +47,40 @@ class CityController extends Controller
         }
     }
 
-
     public function edit($id){
-        return view('backend.city.index');
+        $city = City::findOrFail($id);
+        return view('backend.city.edit', [
+            'item' => $city
+        ]);
     }
 
     protected function update(Request $rq, $id){
-        return view('backend.city.index');
+        $city = City::findOrFail($id);
+        $this->validate($rq,
+            [
+                'cty_name' => 'required|unique:cities,cty_name,'.$city->cty_id.',cty_id',
+                'cty_slug' => 'required|unique:cities,cty_slug,'.$city->cty_id.',cty_id',
+            ],
+            [
+                'cty_name.required' => 'Tên thành phố không được để trống',
+                'cty_name.unique' => 'Thành phố đã được thêm trước đó',
+                'cty_slug.required' => 'Tên đăng nhập không được để trống',
+                'cty_slug.unique' => 'Đường dẫn đã tồn tại',
+            ]
+        );
+        $rq->offsetunset('_token');
+        $city->cty_name = $rq->cty_name;
+        $city->cty_slug = $rq->cty_slug;
+        $check = $city->save();
+        if ($check){
+            return redirect()->route('city')->with('success','Sửa thành công');
+        }
+        else{
+            return redirect()->back()->with('error','Sửa thất bại, vui lòng thử lại');
+        }
     }
 
-    protected function delete( $id){
+    protected function delete($id){
         if (Auth::user()->adm_delete == 1) {
             $city = City::findOrFail($id);
             if ($city->delete()) {
