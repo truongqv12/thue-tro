@@ -48,16 +48,15 @@ class ProfileController extends Controller
 
         if (Hash::check($current_password, $admin->adm_password)){
 
-            if($rq->hasFile('adm_avatar')){
+            if($rq->hasFile('upload_avatar')){
                 Storage::disk('user')->delete($admin->adm_avatar);
-                $image = $rq->adm_avatar;
-                $img_name = date('y-m-d').'_'.$rq->adm_login_name.'_avatar.'.$image->getClientOriginalExtension();
+                $image = $rq->upload_avatar;
+                $img_name = date('y-m-d').'_'.$rq->adm_login_name.'_avatar'.'.jpg';
                 $resize = Image::make($image);
                 $resize->resize(200,200)->encode('jpg');
                 Storage::disk('user')->put($img_name,$resize->__toString());
             }
             $rq->merge([
-                'adm_avatar' => $img_name,
                 'adm_password' => bcrypt($new_password)
             ]);
             $admin->adm_name = $rq->adm_name;
