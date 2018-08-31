@@ -13,11 +13,11 @@ class AdminUserTableSeeder extends Seeder
     {
         if (\App\Models\Admin::count() == 0) {
             \App\Models\Admin::create([
-                'adm_login_name' => 'backend',
+                'adm_login_name' => 'admin',
                 'adm_email'      => 'backend@gmail.com',
                 'adm_name'       => 'Trần Trọng Trường',
                 'adm_phone'       => '01679573155',
-                'adm_password'   => bcrypt('backend'),
+                'adm_password'   => bcrypt('admin'),
             ]);
         }
     }

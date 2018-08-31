@@ -17,7 +17,6 @@ class CreateUsersSaveHousesTable extends Migration
             $table->increments('ush_id');
             $table->integer('ush_use_id');
             $table->integer('ush_house_id');
-            $table->timestamps();
         });
     }
 

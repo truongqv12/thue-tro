@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHouseAttributesTable extends Migration
+class CreateAttributeValueTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateHouseAttributesTable extends Migration
      */
     public function up()
     {
-        Schema::create('house_attributes', function (Blueprint $table) {
-            $table->increments('hat_id');
-            $table->integer('hat_house_id');
-            $table->integer('hat_attributes_id');
-            $table->timestamps();
+        Schema::create('attribute_value', function (Blueprint $table) {
+            $table->increments('atv_id');
+            $table->integer('atv_attributes_id');
+            $table->text('atv_value');
         });
     }
 
@@ -28,6 +27,6 @@ class CreateHouseAttributesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('house_attributes');
+        Schema::dropIfExists('attribute_value');
     }
 }
