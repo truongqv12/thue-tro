@@ -13,7 +13,7 @@ class DistrictController extends Controller
     public function index(){
         $districts = District::all();
         $columns = [
-            'Tên quận, huyện', 'Thành phố', 'Đường dẫn tĩnh', 'Hành động'
+            'Tên quận, huyện', 'Thành Phố', 'Đường dẫn tĩnh', 'Hành động'
         ];
 
         return view('backend.district.index',[
@@ -35,8 +35,8 @@ class DistrictController extends Controller
                 'dis_name' => 'required|unique:districts,dis_name,NULL,dis_id,dis_cty_id,'.$rq->input('dis_cty_id'),
                 'dis_slug' => 'required|unique:districts,dis_slug,NULL,dis_id,dis_cty_id,'.$rq->input('dis_cty_id'),
             ],[
-                'dis_name.required' => 'Tên thành phố không được để trống',
-                'dis_name.unique' => 'Thành phố đã được thêm trước đó',
+                'dis_name.required' => 'Tên quận huyện không được để trống',
+                'dis_name.unique' => 'Quận, huyện đã được thêm trước đó',
                 'dis_slug.required' => 'Tên đăng nhập không được để trống',
                 'dis_slug.unique' => 'Đường dẫn đã tồn tại',
             ]
@@ -72,8 +72,8 @@ class DistrictController extends Controller
                 'dis_name' => 'required|unique:districts,dis_name,' . $district->dis_id . ',dis_id',
                 'dis_slug' => 'required|unique:districts,dis_slug,' . $district->dis_id . ',dis_id',
             ], [
-                'dis_name.required' => 'Tên thành phố không được để trống',
-                'dis_name.unique' => 'Thành phố đã được thêm trước đó',
+                'dis_name.required' => 'Tên quận huyện không được để trống',
+                'dis_name.unique' => 'Quận, huyện đã được thêm trước đó',
                 'dis_slug.required' => 'Tên đăng nhập không được để trống',
                 'dis_slug.unique' => 'Đường dẫn đã tồn tại',
             ]

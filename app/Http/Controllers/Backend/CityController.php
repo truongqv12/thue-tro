@@ -25,7 +25,7 @@ class CityController extends Controller
         return view('backend.city.add');
     }
 
-    protected function create(Request $rq){
+    public function create(Request $rq){
         $this->validate($rq,
             [
                 'cty_name' => 'required|unique:cities,cty_name',
@@ -54,7 +54,7 @@ class CityController extends Controller
         ]);
     }
 
-    protected function update(Request $rq, $id){
+    public function update(Request $rq, $id){
         $city = City::findOrFail($id);
         $this->validate($rq,
             [
@@ -80,7 +80,7 @@ class CityController extends Controller
         }
     }
 
-    protected function delete($id){
+    public function delete($id){
         if (Auth::user()->adm_delete == 1) {
             $city = City::findOrFail($id);
             if ($city->delete()) {

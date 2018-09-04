@@ -39,7 +39,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function (){
         Route::post('/edit/{id}', 'backend\AdminController@update');
         //xóa
         Route::get('/delete/{id}', 'backend\AdminController@delete')->name('administration_delete');
-        //Xem
+    });
+
+    Route::group(['prefix' => 'user'], function (){
+        Route::get('/', 'backend\UserController@index')->name('user');
+        //thêm
+        Route::get('/add', 'backend\UserController@add')->name('user_add');
+        Route::post('/add', 'backend\UserController@create');
+        //Sửa
+        Route::get('/edit/{id}', 'backend\UserController@edit')->name('user_edit');
+        Route::post('/edit/{id}', 'backend\UserController@update');
+        //Xóa
+        Route::get('/delete/{id}', 'backend\UserController@delete')->name('user_delete');
     });
 
     Route::group(['prefix' => 'city'], function (){
@@ -52,7 +63,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function (){
         Route::post('/edit/{id}', 'backend\CityController@update');
         //Xóa
         Route::get('/delete/{id}', 'backend\CityController@delete')->name('city_delete');
-        ;
     });
 
     Route::group(['prefix' => 'districts'], function (){
@@ -65,7 +75,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function (){
         Route::post('/edit/{id}', 'backend\DistrictController@update');
         //Xóa
         Route::get('/delete/{id}', 'backend\DistrictController@delete')->name('district_delete');
-        ;
     });
 
     Route::group(['prefix' => 'wards'], function (){
@@ -78,7 +87,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function (){
         Route::post('/edit/{id}', 'backend\WardsController@update');
         //Xóa
         Route::get('/delete/{id}', 'backend\WardsController@delete')->name('wards_delete');
-        ;
     });
 
     Route::group(['prefix' => 'ajax'], function (){

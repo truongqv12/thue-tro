@@ -19,8 +19,6 @@ class CreateHouseTable extends Migration
             $table->string('h_slug')->unique();
             $table->string('h_image');
             $table->float('h_price');
-            $table->float('h_price_electric');
-            $table->string('h_price_water');
             $table->string('h_time_close',5);
             $table->float('h_area',8,4);
             $table->string('h_wc','100');
@@ -35,6 +33,7 @@ class CreateHouseTable extends Migration
             $table->float('h_lat', 8,2);
             $table->float('h_lng', 8,2);
             $table->boolean('h_status')->default(1);
+            $table->boolean('h_active')->default(0);
             $table->timestamps();
         });
     }

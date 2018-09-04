@@ -28,7 +28,7 @@ class WardsController extends Controller
         ]);
     }
 
-    protected function create(Request $rq){
+    public function create(Request $rq){
         $this->validate($rq,
             [
                 'war_name' => 'required|unique:wards,war_name,NULL,war_id,war_dis_id,'.$rq->input('war_dis_id'),
@@ -59,7 +59,7 @@ class WardsController extends Controller
         ]);
     }
 
-    protected function update(Request $rq, $id){
+    public function update(Request $rq, $id){
         $item = Wards::findOrFail($id);
 
         $dis_slug_old = $item->district->dis_slug;
@@ -97,7 +97,7 @@ class WardsController extends Controller
         }
     }
 
-    protected function delete($id){
+    public function delete($id){
         if (Auth::user()->adm_delete == 1) {
             $district = Wards::findOrFail($id);
             if ($district->delete()) {
