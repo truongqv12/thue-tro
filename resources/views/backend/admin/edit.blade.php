@@ -82,7 +82,10 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-lg btn-danger center-block">Xác nhận</button>
+                    <div class="center-block max-width-content">
+                        <a href="{{route('administration')}}" class="btn btn-lg btn-primary" style="margin-right: 10px">Quay lại</a>
+                        <button type="submit" class="btn btn-lg btn-warning">Sửa <i class="fa fa-pencil-square-o"></i></button>
+                    </div>
                 </div>
             </div>
         </form>

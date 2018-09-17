@@ -37,6 +37,11 @@
                     <i class="fa fa-life-bouy"></i> <span>Admin</span>
                 </a>
             </li>
+            <li>
+                <a href="{{route('user')}}">
+                    <i class="fa fa-users"></i> <span>Quản lý người dùng</span>
+                </a>
+            </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-map-o"></i>

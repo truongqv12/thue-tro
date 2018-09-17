@@ -6,7 +6,6 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -63,6 +62,7 @@ class AdminController extends Controller
         );
 
         $rq->offsetunset('_token');
+        $img_name = '';
         if($rq->hasFile('upload_avatar')){
             $image = $rq->upload_avatar;
             $img_name = date('y-m-d').'_'.$rq->adm_login_name.'_avatar'.'.jpg';
@@ -126,8 +126,6 @@ class AdminController extends Controller
             ]
         );
 
-        $img_name = $admin->adm_avatar;
-
         $rq->offsetunset('_token');
 
         $role = $rq->role;
@@ -156,9 +154,9 @@ class AdminController extends Controller
             $resize = Image::make($image);
             $resize->resize(200,200)->encode('jpg');
             Storage::disk('user')->put($img_name,$resize->__toString());
+            $admin->adm_avatar = $img_name;
         }
         $admin->adm_status = $rq->adm_status;
-        $admin->adm_avatar = $img_name;
         $check = $admin->save();
         if ($check){
             return redirect()->route('administration')->with('success','Sửa tài khoản thành công');
