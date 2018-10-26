@@ -75,11 +75,11 @@ module.exports = __webpack_require__(2);
 /* 1 */
 /***/ (function(module, exports) {
 
-$('#browse_file').on('click', function (e) {
+$('#browse_file').on('click', function () {
     $('#adm_avatar').click();
 });
 
-$('#adm_avatar').on('change', function (e) {
+$('#adm_avatar').on('change', function () {
     var fileInput = this;
     console.log(fileInput.files[0]);
     if (fileInput.files[0]) {
@@ -92,13 +92,13 @@ $('#adm_avatar').on('change', function (e) {
 });
 // ajax info
 $('.ajax-show-info').on("click", function () {
-    var adm_id = $(this).data("id");
+    var url_info = $(this).data("url");
     $('.load_content_modal_ajax').hide();
     $('.loading_view').show();
     setTimeout(function () {
         $.ajax({
             type: "GET",
-            url: 'ajax/info/' + adm_id,
+            url: 'ajax/' + url_info,
             data: {},
             beforeSend: function beforeSend() {
                 $('.load_content_modal_ajax').hide();
@@ -118,7 +118,7 @@ $('.ajax-show-info').on("click", function () {
 });
 
 //Tạo slug tự động
-$('input#name').keyup(function (event) {
+$('input#name').keyup(function () {
     /* Act on the event */
     var title, slug;
 
@@ -152,6 +152,22 @@ $('input#name').keyup(function (event) {
     //In slug ra textbox có id “slug”
     $('input#slug').val(slug);
 });
+
+//Viết hoa chữ đầu dòng
+$.fn.capitalize = function () {
+    $.each(this, function () {
+        var split = this.value.split(' ');
+        for (var i = 0, len = split.length; i < len; i++) {
+            split[i] = split[i].charAt(0).toUpperCase() + split[i].slice(1).toLowerCase();
+        }
+        this.value = split.join(' ');
+    });
+    return this;
+};
+
+$('input#name').on('keyup', function () {
+    $(this).capitalize();
+}).capitalize();
 
 /***/ }),
 /* 2 */

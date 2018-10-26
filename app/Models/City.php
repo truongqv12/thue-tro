@@ -8,8 +8,9 @@ class City extends Model
 {
     protected $table = 'cities';
     protected $primaryKey = 'cty_id';
+    public $timestamps = false;
     protected $fillable = [
-        'cty_name', 'cty_slug'
+        'cty_name'
     ];
 
     function district() {

@@ -49,7 +49,7 @@
                       @endif
                     </td>
                     <td>
-                      <a href="" class="btn btn-action label label-info ajax-show-info" data-id="{{$user->use_id}}" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i></a>
+                      <a href="" class="btn btn-action label label-info ajax-show-info" data-url="{{'info-user/' . $user->use_id}}" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i></a>
                       @if(Auth::user()->adm_edit == 1)
                         <a href="{{route('user_edit',['id'=>$user->use_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
                       @endif
@@ -78,7 +78,23 @@
     <!-- /.row -->
   </section>
   <!-- /.content -->
-
+  <div class="modal modal-admin-style fade" id="modal-default">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Thông tin</h4>
+        </div>
+        <div class="modal-body">
+          <div class="loading_view" style="background: url('{{asset('backend/images/loading.gif')}}') no-repeat center center"></div>
+          <div class="load_content_modal_ajax"></div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
 @endsection
 
 @section('script')

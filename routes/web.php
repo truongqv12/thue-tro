@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 //backend login
@@ -89,7 +89,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function (){
         Route::get('/delete/{id}', 'backend\WardsController@delete')->name('wards_delete');
     });
 
+    Route::group(['prefix' => 'street'], function (){
+        Route::get('/', 'backend\StreetController@index')->name('street');
+        //thêm
+        Route::get('/add', 'backend\StreetController@add')->name('street_add');
+        Route::post('/add', 'backend\StreetController@create');
+        //Sửa
+        Route::get('/edit/{id}', 'backend\StreetController@edit')->name('street_edit');
+        Route::post('/edit/{id}', 'backend\StreetController@update');
+        //Xóa
+        Route::get('/delete/{id}', 'backend\StreetController@delete')->name('street_delete');
+    });
+
     Route::group(['prefix' => 'ajax'], function (){
-        Route::get('/info/{id}', 'backend\Ajax\ViewInfoController@ajaxInfo')->name('administration_info_ajax');
+        Route::get('/info-admin/{id}', 'backend\Ajax\ViewInfoAdminController@ajaxInfo')->name('administration_info_ajax');
+        Route::get('/info-user/{id}', 'backend\Ajax\ViewInfoUserController@ajaxInfo')->name('user_info_ajax');
     });
 });

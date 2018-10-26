@@ -3,27 +3,27 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\District;
-use App\Models\Wards;
+use App\Models\Street;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class WardsController extends Controller
+class StreetController extends Controller
 {
     public function index(){
-        $wards = Wards::all();
+        $streets = Street::all();
         $columns = [
-            'Tên phường, xã', 'Quận', 'Hành động'
+            'Tên đường', 'Quận', 'Hành động'
         ];
 
-        return view('backend.wards.index',[
-            'wards' => $wards,
+        return view('backend.street.index',[
+            'streets' => $streets,
             'columns' => $columns,
         ]);
     }
 
     public function add(){
-        return view('backend.wards.add', [
+        return view('backend.street.add', [
             'districts' => District::all()
         ]);
     }
@@ -31,15 +31,15 @@ class WardsController extends Controller
     public function create(Request $rq){
         $this->validate($rq,
             [
-                'war_name' => 'required|unique:wards,war_name,NULL,war_id,war_dis_id,'.$rq->input('war_dis_id'),
+                'str_name' => 'required|unique:streets,str_name,NULL,str_id,str_dis_id,'.$rq->input('str_dis_id'),
             ],[
-                'war_name.required' => 'Tên phường xã không được để trống',
-                'war_name.unique' => 'Phường xã đã được thêm trước đó',
+                'str_name.required' => 'Tên đường không được để trống',
+                'str_name.unique' => 'Đường đã được thêm trước đó',
             ]
         );
         $rq->offsetunset('_token');
         //tạo mới
-        if (Wards::create($rq->all())){
+        if (Street::create($rq->all())){
             return redirect()->back()->with('success','Thêm thành công');
         }
         else{
@@ -48,32 +48,31 @@ class WardsController extends Controller
     }
 
     public function edit($id){
-        $item = Wards::findOrFail($id);
+        $item = Street::findOrFail($id);
 
-        return view('backend.wards.edit', [
+        return view('backend.street.edit', [
             'item' => $item,
             'districts' => District::all()
         ]);
     }
 
     public function update(Request $rq, $id){
-        $item = Wards::findOrFail($id);
+        $item = Street::findOrFail($id);
 
         $this->validate($rq,
             [
-                'war_name' => 'required|unique:wards,war_name,'.$item->war_id.',war_id',
+                'str_name' => 'required',
             ],[
-                'war_name.required' => 'Tên phường xã không được để trống',
-                'war_name.unique' => 'Phường xã đã được thêm trước đó',
+                'str_name.required' => 'Tên phường xã không được để trống',
             ]
         );
         $rq->offsetunset('_token');
 
-        $item->war_name = $rq->war_name;
-        $item->war_dis_id = $rq->war_dis_id;
+        $item->str_name = $rq->str_name;
+        $item->str_dis_id = $rq->str_dis_id;
         $check = $item->save();
         if ($check){
-            return redirect()->route('wards')->with('success','Sửa thành công');
+            return redirect()->route('street')->with('success','Sửa thành công');
         }
         else{
             return redirect()->back()->with('error','Sửa thất bại, vui lòng thử lại');
@@ -82,8 +81,8 @@ class WardsController extends Controller
 
     public function delete($id){
         if (Auth::user()->adm_delete == 1) {
-            $district = Wards::findOrFail($id);
-            if ($district->delete()) {
+            $street = Street::findOrFail($id);
+            if ($street->delete()) {
                 return redirect()->back()->with('success','Xóa thành công');
             }
             else {

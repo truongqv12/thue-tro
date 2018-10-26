@@ -42,7 +42,7 @@
                     <i class="fa fa-users"></i> <span>Quản lý người dùng</span>
                 </a>
             </li>
-            <li class="treeview">
+            <li class="treeview treeview-location">
                 <a href="#">
                     <i class="fa fa-map-o"></i>
                     <span>Địa điểm</span>
@@ -54,10 +54,11 @@
                     <li><a href="{{route('city')}}"><i class="fa fa-circle-o"></i> Thành phố </a></li>
                     <li><a href="{{route('district')}}"><i class="fa fa-circle-o"></i> Quận/Huyện </a></li>
                     <li><a href="{{route('wards')}}"><i class="fa fa-circle-o"></i> Phường/Xã </a></li>
+                    <li><a href="{{route('street')}}"><i class="fa fa-circle-o"></i> Đường </a></li>
                 </ul>
             </li>
             <li>
-                <a href="/">
+                <a href="">
                     <i class="fa fa-university"></i> <span>Danh sách trường đại học</span>
                 </a>
             </li>

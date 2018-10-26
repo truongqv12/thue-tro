@@ -5,7 +5,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Quản lý địa chỉ
+      Quản lý địa điểm
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -38,7 +38,6 @@
                 @foreach($cities as $item)
                   <tr>
                     <td>{{$item->cty_name}}</td>
-                    <td>{{$item->cty_slug}}</td>
                     <td>
                       @if( Auth::user()->adm_edit == 1)
                         <a href="{{route('city_edit',['id' => $item->cty_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
@@ -73,8 +72,9 @@
 
 @section('script')
   <script>
-  $(function () {
-    $('#data_table').DataTable()
-  })
-</script>
+    $(function () {
+      $('#data_table').DataTable()
+    });
+    $('.treeview-location').addClass('active');
+  </script>
 @endsection

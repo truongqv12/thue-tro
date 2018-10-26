@@ -1,5 +1,5 @@
 @extends('backend.layout.index')
-@section('page_title','Administration')
+@section('page_title','Đường xá')
 
 @section('content')
   <!-- Content Header (Page header) -->
@@ -9,7 +9,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Wards</li>
+      <li class="active">Streets</li>
 
     </ol>
   </section>
@@ -19,9 +19,9 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Phường \ Xã</h3>
+            <h3 class="box-title">Đường</h3>
             @if( Auth::user()->adm_add == 1 )
-              <a href="{{route('wards_add')}}" class="btn btn-success btn-sm" style="margin-left: 10px"><i class="fa fa-plus-square"></i> Thêm mới </a>
+              <a href="{{route('street_add')}}" class="btn btn-success btn-sm" style="margin-left: 10px"><i class="fa fa-plus-square"></i> Thêm mới </a>
             @endif
           </div>
           <!-- /.box-header -->
@@ -35,16 +35,16 @@
               </tr>
               </thead>
               <tbody>
-                @foreach($wards as $item)
+                @foreach($streets as $item)
                   <tr>
-                    <td>{{$item->war_name}}</td>
+                    <td>{{$item->str_name}}</td>
                     <td>{{$item->district->dis_name . ' - ' . $item->district->city->cty_name}}</td>
                     <td>
                       @if( Auth::user()->adm_edit == 1)
-                        <a href="{{route('wards_edit',['id' => $item->war_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
+                        <a href="{{route('street_edit',['id' => $item->str_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
                       @endif
                       @if(Auth::user()->adm_delete == 1)
-                        <a href="{{route('wards_delete',['id' => $item->war_id])}}" onclick="return confirm('Bạn có chắc muốn xóa: {{$item->war_name}}')" class="btn btn-action label label-danger"><i class="fa fa-trash"></i></a>
+                        <a href="{{route('street_delete',['id' => $item->str_id])}}" onclick="return confirm('Bạn có chắc muốn xóa: {{$item->str_name}}')" class="btn btn-action label label-danger"><i class="fa fa-trash"></i></a>
                       @endif
                     </td>
                   </tr>

@@ -1,9 +1,3 @@
-<!--/**
- * Created by PhpStorm.
- * User: Truong
- * Date: 8/8/2018
- * Time: 2:07 PM
- */-->
 @extends('backend.layout.index')
 @section('page_title','Thêm mới')
 @section('link_css')

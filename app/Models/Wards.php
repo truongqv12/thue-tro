@@ -8,8 +8,9 @@ class Wards extends Model
 {
     protected $table = 'wards';
     protected $primaryKey = 'war_id';
+    public $timestamps = false;
     protected $fillable = [
-        'war_name', 'war_slug', 'war_dis_id'
+        'war_name', 'war_dvhc', 'war_dis_id'
     ];
 
     function district() {

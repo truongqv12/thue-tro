@@ -1,9 +1,3 @@
-<!--/**
- * Created by PhpStorm.
- * User: Truong
- * Date: 8/8/2018
- * Time: 2:07 PM
- */-->
 @extends('backend.layout.index')
 @section('page_title','Thêm mới')
 @section('link_css')
@@ -14,7 +8,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Thêm quận huyện
+            Quản lý địa điểm
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -27,7 +21,7 @@
         <form action="" method="POST" role="form">
             <div class="box box-danger">
                 <div class="box-header">
-                    <h3 class="box-title">Thêm mới</h3>
+                    <h3 class="box-title">Sửa</h3>
                 </div>
                 <div class="box-body">
                     <div class="row">
@@ -41,20 +35,6 @@
                                 @if($errors->has('cty_name'))
                                     <div class="help-block text-red">
                                         * {!! $errors->first('cty_name') !!}
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Đường dẫn tĩnh</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">@</span>
-                                    <input type="text" class="form-control" readonly placeholder="Đường dẫn tĩnh" name="cty_slug" id="slug"  value="{{$item->cty_slug}}">
-                                </div>
-                                @if($errors->has('cty_slug'))
-                                    <div class="help-block text-red">
-                                        {!! $errors->first('cty_slug') !!}
                                     </div>
                                 @endif
                             </div>
@@ -75,4 +55,7 @@
     <!-- /.content -->
 @endsection
 @section('script')
+    <script>
+        $('.treeview-location').addClass('active');
+    </script>
 @endsection

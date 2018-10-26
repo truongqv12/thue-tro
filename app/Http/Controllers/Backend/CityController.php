@@ -6,13 +6,14 @@ use App\Models\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CityController extends Controller
 {
     public function index(){
         $cities = City::all();
         $columns = [
-            'Tên thành phố', 'Đường dẫn tĩnh', 'Hành động'
+            'Tên thành phố', 'Hành động'
         ];
 
         return view('backend.city.index',[
@@ -22,19 +23,21 @@ class CityController extends Controller
     }
 
     public function add(){
-        return view('backend.city.add');
+        if (Auth::user()->adm_edit == 1) {
+            return view('backend.city.add');
+        }
+        else {
+            return redirect()->back();
+        }
     }
 
     public function create(Request $rq){
         $this->validate($rq,
             [
                 'cty_name' => 'required|unique:cities,cty_name',
-                'cty_slug' => 'required|unique:cities,cty_slug',
             ],[
                 'cty_name.required' => 'Tên thành phố không được để trống',
                 'cty_name.unique' => 'Thành phố đã được thêm trước đó',
-                'cty_slug.required' => 'Tên đăng nhập không được để trống',
-                'cty_slug.unique' => 'Đường dẫn đã tồn tại',
             ]
         );
         $rq->offsetunset('_token');
@@ -48,10 +51,15 @@ class CityController extends Controller
     }
 
     public function edit($id){
-        $city = City::findOrFail($id);
-        return view('backend.city.edit', [
-            'item' => $city
-        ]);
+        if (Auth::user()->adm_edit == 1) {
+            $city = City::findOrFail($id);
+            return view('backend.city.edit', [
+                'item' => $city
+            ]);
+        }
+        else {
+            return redirect()->back();
+        }
     }
 
     public function update(Request $rq, $id){
@@ -59,18 +67,14 @@ class CityController extends Controller
         $this->validate($rq,
             [
                 'cty_name' => 'required|unique:cities,cty_name,'.$city->cty_id.',cty_id',
-                'cty_slug' => 'required|unique:cities,cty_slug,'.$city->cty_id.',cty_id',
             ],
             [
                 'cty_name.required' => 'Tên thành phố không được để trống',
                 'cty_name.unique' => 'Thành phố đã được thêm trước đó',
-                'cty_slug.required' => 'Tên đăng nhập không được để trống',
-                'cty_slug.unique' => 'Đường dẫn đã tồn tại',
             ]
         );
         $rq->offsetunset('_token');
         $city->cty_name = $rq->cty_name;
-        $city->cty_slug = $rq->cty_slug;
         $check = $city->save();
         if ($check){
             return redirect()->route('city')->with('success','Sửa thành công');
@@ -83,11 +87,17 @@ class CityController extends Controller
     public function delete($id){
         if (Auth::user()->adm_delete == 1) {
             $city = City::findOrFail($id);
-            if ($city->delete()) {
-                return redirect()->back()->with('success','Xóa thành công');
+            $row = DB::table('districts')->where('dis_cty_id','=',$id)->get();
+            if($row->toArray()){
+                return redirect()->back()->with('error','Xóa không thành công, bạn phải xóa những quận huyện thuộc thành phố '. $city->cty_name . ' trước');
             }
             else {
-                return redirect()->back()->with('error','Xóa không thành công');
+                if ($city->delete()) {
+                    return redirect()->back()->with('success','Xóa thành công');
+                }
+                else {
+                    return redirect()->back()->with('error','Xóa không thành công');
+                }
             }
         }
         else {

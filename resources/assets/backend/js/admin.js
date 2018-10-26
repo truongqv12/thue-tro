@@ -1,8 +1,8 @@
-$('#browse_file').on('click',function (e) {
+$('#browse_file').on('click',function () {
     $('#adm_avatar').click();
 });
 
-$('#adm_avatar').on('change', function (e) {
+$('#adm_avatar').on('change', function () {
     var fileInput = this;
     console.log(fileInput.files[0]);
     if (fileInput.files[0]){
@@ -15,13 +15,13 @@ $('#adm_avatar').on('change', function (e) {
 });
 // ajax info
 $('.ajax-show-info').on("click",function(){
-    var adm_id =  $(this).data("id");
+    var url_info =  $(this).data("url");
     $('.load_content_modal_ajax').hide();
     $('.loading_view').show();
     setTimeout (function() {
         $.ajax({
             type: "GET",
-            url: 'ajax/info/' + adm_id,
+            url: 'ajax/' + url_info,
             data: {
             },
             beforeSend: function() {
@@ -39,11 +39,10 @@ $('.ajax-show-info').on("click",function(){
             }
         });
     }, 300);
-
 });
 
 //Tạo slug tự động
-$('input#name').keyup(function(event) {
+$('input#name').keyup(function() {
     /* Act on the event */
     var title, slug;
 
@@ -78,3 +77,19 @@ $('input#name').keyup(function(event) {
     $('input#slug').val(slug);
 
 });
+
+//Viết hoa chữ đầu dòng
+$.fn.capitalize = function () {
+    $.each(this, function () {
+        var split = this.value.split(' ');
+        for (var i = 0, len = split.length; i < len; i++) {
+            split[i] = split[i].charAt(0).toUpperCase() + split[i].slice(1).toLowerCase();
+        }
+        this.value = split.join(' ');
+    });
+    return this;
+};
+
+$('input#name').on('keyup', function () {
+    $(this).capitalize();
+}).capitalize();

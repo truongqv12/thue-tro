@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration
+class CreateHouseTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->increments('cat_id');
-            $table->string('cat_name');
-            $table->string('cat_slug');
-            $table->tinyInteger('cat_avtive')->default(1);
-            $table->integer('cat_parent_id')->default(0);
+        Schema::create('house_type', function (Blueprint $table) {
+            $table->increments('ht_id');
+            $table->string('ht_name',255);
+            $table->tinyInteger('ht_active')->default(1);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('house_type');
     }
 }

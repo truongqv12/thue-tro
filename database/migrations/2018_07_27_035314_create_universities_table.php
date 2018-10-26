@@ -19,6 +19,7 @@ class CreateUniversitiesTable extends Migration
             $table->string('uni_address', 255);
             $table->float('uni_lat', '8','2');
             $table->float('uni_lng', '8','2');
+            $table->tinyInteger('uni_avtive')->default(1);
             $table->timestamps();
         });
     }

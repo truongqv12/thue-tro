@@ -5,7 +5,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Quản lý địa chỉ
+      Quản lý địa điểm
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -37,9 +37,8 @@
               <tbody>
                 @foreach($districts as $item)
                   <tr>
-                    <td>{{$item->dis_name}}</td>
+                    <td>{{$item->dis_dvhc . ' ' . $item->dis_name}}</td>
                     <td>{{$item->city->cty_name}}</td>
-                    <td>{{$item->dis_slug}}</td>
                     <td>
                       @if( Auth::user()->adm_edit == 1)
                         <a href="{{route('district_edit',['id' => $item->dis_id])}}" class="btn btn-action label label-success"><i class="fa fa-pencil"></i></a>
@@ -76,6 +75,7 @@
   <script>
   $(function () {
     $('#data_table').DataTable()
-  })
+  });
+  $('.treeview-location').addClass('active');
 </script>
 @endsection

@@ -1,9 +1,3 @@
-<!--/**
- * Created by PhpStorm.
- * User: Truong
- * Date: 8/8/2018
- * Time: 2:07 PM
- */-->
 @extends('backend.layout.index')
 @section('page_title','Thêm mới')
 @section('link_css')
@@ -14,7 +8,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Thêm thành phố
+            Quản lý địa điểm
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -36,25 +30,11 @@
                                 <label for="">Tên thành phố</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">@</span>
-                                    <input type="text" class="form-control" placeholder="Nhập tên thành phố" name="cty_name" id="name"  value="{{ old('cty_name') }}">
+                                    <input type="text" class="form-control" placeholder="Nhập tên thành phố" name="cty_name" value="{{ old('cty_name') }}">
                                 </div>
                                 @if($errors->has('cty_name'))
                                     <div class="help-block text-red">
                                         * {!! $errors->first('cty_name') !!}
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Đường dẫn tĩnh</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">@</span>
-                                    <input type="text" class="form-control" readonly placeholder="Đường dẫn tĩnh" name="cty_slug" id="slug"  value="{{ old('cty_slug') }}">
-                                </div>
-                                @if($errors->has('cty_slug'))
-                                    <div class="help-block text-red">
-                                        {!! $errors->first('cty_slug') !!}
                                     </div>
                                 @endif
                             </div>
@@ -72,4 +52,7 @@
     <!-- /.content -->
 @endsection
 @section('script')
+    <script>
+        $('.treeview-location').addClass('active');
+    </script>
 @endsection

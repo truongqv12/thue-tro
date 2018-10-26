@@ -8,8 +8,9 @@ class District extends Model
 {
     protected $table = 'districts';
     protected $primaryKey = 'dis_id';
+    public $timestamps = false;
     protected $fillable = [
-        'dis_name', 'dis_slug', 'dis_cty_id'
+        'dis_name', 'dis_dvhc' , 'dis_cty_id'
     ];
 
     function city() {
@@ -18,5 +19,9 @@ class District extends Model
 
     function wards() {
         return $this->hasMany(Wards::class, 'war_dis_id', 'dis_id');
+    }
+
+    function street() {
+        return $this->hasMany(Street::class, 'str_dis_id', 'dis_id');
     }
 }

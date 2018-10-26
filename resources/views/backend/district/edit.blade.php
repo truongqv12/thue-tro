@@ -1,9 +1,3 @@
-<!--/**
- * Created by PhpStorm.
- * User: Truong
- * Date: 8/8/2018
- * Time: 2:07 PM
- */-->
 @extends('backend.layout.index')
 @section('page_title','Thêm mới')
 @section('link_css')
@@ -14,7 +8,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Thêm quận huyện
+            Quản lý địa điểm
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -46,23 +40,11 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="form-group">
-                                        <label for="">Đường dẫn tĩnh</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">@</span>
-                                            <input type="text" class="form-control" placeholder="Đường dẫn tĩnh" name="dis_slug" id="slug" readonly value="{{$item->dis_slug}}">
-                                        </div>
-                                        @if($errors->has('dis_slug'))
-                                            <div class="help-block text-red">
-                                                {!! $errors->first('dis_slug') !!}
-                                            </div>
-                                        @endif
-                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Thành phố</label>
-                                        <select class="form-control select2" style="width: 100%;" name="dis_cty_id">
+                                        <select class="form-control select2" style="width: 100%;" name="dis_cty_id" title="">
                                             @foreach($cities as $city)
                                                 <option value="{{$city->cty_id}}" {{($item->dis_cty_id == $city->cty_id) ? 'selected' : ''}}>{{$city->cty_name}}</option>
                                             @endforeach
@@ -87,4 +69,7 @@
     <!-- /.content -->
 @endsection
 @section('script')
+    <script>
+        $('.treeview-location').addClass('active');
+    </script>
 @endsection

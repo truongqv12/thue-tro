@@ -16,9 +16,8 @@ class CreateWardsTable extends Migration
         Schema::create('wards', function (Blueprint $table) {
             $table->increments('war_id');
             $table->string('war_name');
-            $table->string('war_slug');
-            $table->string('war_dis_id');
-            $table->timestamps();
+            $table->string('war_dvhc',20);
+            $table->integer('war_dis_id')->default(0);
         });
     }
 
