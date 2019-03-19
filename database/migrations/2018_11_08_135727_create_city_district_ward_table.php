@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitiesTable extends Migration
+class CreateCityDistrictWardTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
-            $table->increments('cty_id');
-            $table->string('cty_name')->unique();
-        });
+        $file = base_path('database\don_vi_hanh_chinh.sql');
+        \Illuminate\Support\Facades\DB::unprepared(file_get_contents($file));
     }
 
     /**
@@ -26,6 +24,8 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('city');
+        Schema::dropIfExists('district');
+        Schema::dropIfExists('ward');
     }
 }

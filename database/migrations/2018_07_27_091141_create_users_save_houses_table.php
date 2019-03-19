@@ -14,9 +14,9 @@ class CreateUsersSaveHousesTable extends Migration
     public function up()
     {
         Schema::create('users_save_houses', function (Blueprint $table) {
-            $table->increments('ush_id');
-            $table->integer('ush_use_id');
-            $table->integer('ush_house_id');
+            $table->increments('us_id');
+            $table->integer('us_use_id');
+            $table->integer('us_house_id');
         });
     }
 

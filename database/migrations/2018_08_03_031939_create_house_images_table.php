@@ -13,11 +13,10 @@ class CreateHouseImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('house_images', function (Blueprint $table) {
-            $table->increments('hi_id');
-            $table->integer('hi_h_id');
-            $table->string('hi_url');
-            $table->timestamps();
+        Schema::create('house_picture', function (Blueprint $table) {
+            $table->increments('hp_id');
+            $table->integer('hp_house_id');
+            $table->string('hp_picture');
         });
     }
 

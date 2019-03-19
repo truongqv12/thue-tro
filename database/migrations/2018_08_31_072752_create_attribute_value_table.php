@@ -15,8 +15,8 @@ class CreateAttributeValueTable extends Migration
     {
         Schema::create('attribute_value', function (Blueprint $table) {
             $table->increments('atv_id');
-            $table->integer('atv_attributes_id');
-            $table->text('atv_value');
+            $table->integer('atv_attribute_id');
+            $table->string('atv_value', 255);
         });
     }
 

@@ -19,7 +19,7 @@ class CreateBannerTable extends Migration
             $table->string('ban_slug');
             $table->string('ban_link')->default('#');
             $table->string('ban_image');
-            $table->boolean('ban_status')->default('0');
+            $table->boolean('ban_avtive')->default('0');
             $table->timestamps();
         });
     }

@@ -15,18 +15,17 @@ class CreateAdminUserTable extends Migration
     {
         Schema::create('admin_user', function (Blueprint $table) {
             $table->increments('adm_id');
-            $table->string('adm_login_name')->unique();
+            $table->string('adm_login_name','255')->unique();
             $table->string('adm_password');
             $table->string('adm_name');
             $table->string('adm_email')->unique();
             $table->string('adm_avatar')->nullable();
             $table->string('adm_phone','20')->nullable();
-            $table->tinyInteger('adm_active')->default('1');
-            $table->tinyInteger('adm_add')->default('1');
-            $table->tinyInteger('adm_edit')->default('1');
-            $table->tinyInteger('adm_delete')->default('1');
-            $table->boolean('adm_status')->default('1');
-            $table->integer('admin_id')->default('0');
+            $table->boolean('adm_create')->default('1');
+            $table->boolean('adm_edit')->default('1');
+            $table->boolean('adm_delete')->default('1');
+            $table->boolean('adm_setting')->default('0');
+            $table->boolean('adm_active')->default('1');
             $table->rememberToken();
             $table->timestamps();
         });

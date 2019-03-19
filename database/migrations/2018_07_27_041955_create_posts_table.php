@@ -14,13 +14,13 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->increments('pos_id');
-            $table->string('pos_title');
-            $table->string('pos_slug');
-            $table->text('pos_content');
-            $table->integer('pos_cat_id');
-            $table->integer('pos_use_id');
-            $table->tinyInteger('pos_status')->default(1);
+            $table->increments('ps_id');
+            $table->string('ps_title');
+            $table->string('ps_slug');
+            $table->text('ps_content');
+            $table->integer('ps_cat_id');
+            $table->integer('ps_use_id');
+            $table->tinyInteger('ps_status')->default(1);
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('cat_id');
             $table->string('cat_name');
             $table->string('cat_slug');
+            $table->integer('cat_order')->default(0);
             $table->tinyInteger('cat_avtive')->default(1);
             $table->integer('cat_parent_id')->default(0);
             $table->timestamps();

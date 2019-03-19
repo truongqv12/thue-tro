@@ -14,11 +14,11 @@ class CreateReportsTable extends Migration
     public function up()
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->increments('rep_id');
-            $table->string('rep_title');
-            $table->integer('rep_use_id');
-            $table->string('rep_content');
-            $table->tinyInteger('rep_status');
+            $table->increments('rp_id');
+            $table->string('rp_title');
+            $table->integer('rp_use_id');
+            $table->string('rp_content');
+            $table->tinyInteger('rp_status');
             $table->timestamps();
         });
     }

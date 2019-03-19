@@ -14,10 +14,10 @@ class CreateHouseAttributesValueTable extends Migration
     public function up()
     {
         Schema::create('house_attributes_value', function (Blueprint $table) {
-            $table->increments('hav_id');
-            $table->integer('hav_attributes_id');
-            $table->integer('hav_house_id');
-            $table->integer('hav_attribute_value_id');
+            $table->increments('ha_id');
+            $table->integer('ha_attributes_id');
+            $table->integer('ha_house_id');
+            $table->integer('ha_attribute_value_id');
         });
     }
 
